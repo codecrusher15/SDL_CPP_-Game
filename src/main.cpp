@@ -14,6 +14,8 @@ int main()
 	SDL_Texture* background = window.Background("../res/images/bg.jpg");
 	bool running = true;
 
+
+	//GameLoop
 	SDL_Event event;
 	while (running)
 	{

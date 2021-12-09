@@ -1,4 +1,5 @@
 #include"../include/MainRenderer.hpp"
+#include"../include/GameObject.hpp"
 #include<iostream>
 using namespace std;
 MainRenderer::MainRenderer(const char* title,int width,int height):mainWindow(NULL),renderer(NULL)
@@ -25,6 +26,10 @@ void MainRenderer::clear()
 void MainRenderer::renderTexture(SDL_Texture* tex)
 {
 	SDL_RenderCopy(renderer,tex,NULL,NULL);
+	GameObject obj = GameObject("../res/images/tmp.png",renderer,"Timepass");
+	bool init = true;
+	obj.Update();
+	obj.Render();
 }
 void MainRenderer::display()
 {
