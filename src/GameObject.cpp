@@ -5,13 +5,13 @@ GameObject::GameObject(const char* texturePath,SDL_Renderer* renderer,const char
 	objectTexture = NULL;
 	SDL_Texture* texture = NULL;
 	objectTexture = IMG_LoadTexture(renderer,texturePath);
-
 	if(objectTexture==NULL) std::cout <<"Failed to load " << objectName << std::endl;
 	this->renderer = renderer;
+	x=0;
 }
-
 void GameObject::Update()
 {
+	x+=10;
 	srcRect.x=0;
 	srcRect.y=0;
 	srcRect.w=215;
@@ -19,7 +19,7 @@ void GameObject::Update()
 
 	dstRect.h=64;
 	dstRect.w=64;
-	dstRect.x=32;
+	dstRect.x=x;
 	dstRect.y=32;
 }
 
