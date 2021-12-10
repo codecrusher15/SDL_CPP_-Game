@@ -13,6 +13,7 @@ SDL_Texture*  MainRenderer::Background(const char* filePath)
 	SDL_Texture* texture = NULL;
 	texture = IMG_LoadTexture(renderer,filePath);
 	if(texture==NULL) cout <<"Failed to load Background" << endl;
+	myObj = new GameObject("../res/images/tmp.png",renderer,"Timepass");
 	return texture;
 }
 void MainRenderer::clear()
@@ -24,9 +25,8 @@ void MainRenderer::renderTexture(SDL_Texture* tex)
 {
 	SDL_RenderCopy(renderer,tex,NULL,NULL);
 	bool init = true;
-	GameObject obj = GameObject("../res/images/tmp.png",renderer,"Timepass");
-	obj.Update();
-	obj.Render();
+	myObj->Update();
+	myObj->Render();
 }
 void MainRenderer::display()
 {

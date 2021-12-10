@@ -13,12 +13,19 @@ int main()
 	MainRenderer window("Fort Lords",1800,900);
 	SDL_Texture* background = window.Background("../res/images/bg.jpg");
 	bool running = true;
+	//FPS
+	const int FPS = 60;
+	const int frameDelayTime = 1000/FPS;
 
+	Uint32  frameStart;
+	int frameTime; 
 
 	//GameLoop
 	SDL_Event event;
 	while (running)
 	{
+		frameStart = SDL_GetTicks();
+
 		while (SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT) running = false;
@@ -26,6 +33,10 @@ int main()
 		window.clear();
 		window.renderTexture(background);
 		window.display();
+
+		frameTime = SDL_GetTicks() - frameStart;
+		if(frameDelayTime > frameTime) SDL_Delay(frameDelayTime-frameTime);
+
 	}
 	
 

@@ -7,6 +7,7 @@ class MainRenderer
 private:
 	SDL_Window* mainWindow;
 	SDL_Renderer* renderer;
+	GameObject* myObj;
 public:
 	MainRenderer(const char*,int,int);
 	SDL_Texture* Background(const char*);

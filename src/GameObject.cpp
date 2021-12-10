@@ -11,7 +11,7 @@ GameObject::GameObject(const char* texturePath,SDL_Renderer* renderer,const char
 }
 void GameObject::Update()
 {
-	x+=10;
+	x+=2;
 	srcRect.x=0;
 	srcRect.y=0;
 	srcRect.w=215;
