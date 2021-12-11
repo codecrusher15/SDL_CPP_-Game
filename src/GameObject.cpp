@@ -1,29 +1,37 @@
 #include "../include/GameObject.hpp"
 #include<iostream>
-GameObject::GameObject(const char* texturePath,SDL_Renderer* renderer,const char* objectName)
+GameObject::GameObject(const char* texturePath,SDL_Renderer* renderer,const char* objectName,int direction)
 {
+	flip = direction; // if flip is 1 then source image get flipped during rendering 
 	objectTexture = NULL;
 	SDL_Texture* texture = NULL;
-	objectTexture = IMG_LoadTexture(renderer,texturePath);
-	if(objectTexture==NULL) std::cout <<"Failed to load " << objectName << std::endl;
+	objectTexture = IMG_LoadTexture(renderer,texturePath); //Loading texture
+	if(objectTexture==NULL) std::cout <<"Failed to load " << objectName << std::endl; //Error if failed to load
 	this->renderer = renderer;
-	x=0;
 }
-void GameObject::Update()
+void GameObject::Update(int x,int y,int width,int height) //x and y co-ordinates of texture
 {
-	x+=2;
 	srcRect.x=0;
 	srcRect.y=0;
-	srcRect.w=215;
-	srcRect.h=183;
+	srcRect.w=562;
+	srcRect.h=519;
 
-	dstRect.h=64;
-	dstRect.w=64;
+	dstRect.h=height;
+	dstRect.w=width;
 	dstRect.x=x;
-	dstRect.y=32;
+	dstRect.y=y;
 }
 
-void GameObject::Render()
+void GameObject::Render() //render function which render to screen when called inside the loop
 {
-	SDL_RenderCopy(renderer,objectTexture,&srcRect,&dstRect);
+	if(flip) SDL_RenderCopyEx(renderer,objectTexture,&srcRect,&dstRect,0,NULL,SDL_FLIP_HORIZONTAL);
+	else SDL_RenderCopy(renderer,objectTexture,&srcRect,&dstRect);
+}
+int GameObject::getX()
+{
+	return x;
+}
+int GameObject::getY()
+{
+	return y;
 }

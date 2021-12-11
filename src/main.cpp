@@ -2,26 +2,34 @@
 #include<SDL2/SDL_image.h>
 #include<iostream>
 #include"../include/MainRenderer.hpp"
-using namespace std;
 int main()
 {
 	if(SDL_Init(SDL_INIT_VIDEO) >0)
-		cout << "SDL initialisation failed. ERROR:" << SDL_GetError() << endl;
+		std::cout << "SDL initialisation failed. ERROR:" << SDL_GetError() << std::endl;
 	
 	if(!(IMG_Init(IMG_INIT_PNG)))
-		cout << "Image initialisation failed. ERROR:" << SDL_GetError() << endl;
-	MainRenderer window("Fort Lords",1800,900);
-	SDL_Texture* background = window.Background("../res/images/bg.jpg");
+		std::cout << "Image initialisation failed. ERROR:" << SDL_GetError() << std::endl;
+
+
+
 	bool running = true;
 	//FPS
 	const int FPS = 60;
 	const int frameDelayTime = 1000/FPS;
-
 	Uint32  frameStart;
-	int frameTime; 
-
-	//GameLoop
+	int frameTime;
+	
+	//Event
 	SDL_Event event;
+
+	//Window creation
+	MainRenderer window("Zombie Shooter",1800,900);
+
+	//Loading background
+	SDL_Texture* background = window.Background("../res/images/bg.jpg");
+
+	
+	//GameLoop
 	while (running)
 	{
 		frameStart = SDL_GetTicks();
@@ -29,6 +37,7 @@ int main()
 		while (SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT) running = false;
+			window.passEvents(&event);
 		}
 		window.clear();
 		window.renderTexture(background);
