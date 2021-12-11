@@ -2,6 +2,11 @@
 #include<iostream>
 void ShooterActions::run(int direction)
 {
+	if(isDead)
+	{
+		this->dead(direction);
+		return;
+	}
 	i=j;
 	i = i%8;
 	if(direction)
@@ -50,6 +55,11 @@ void ShooterActions::dead(int direction)
 
 void ShooterActions::shoot(int direction)
 {
+	if(isDead)
+	{
+		this->dead(direction);
+		return;
+	}
 	i=j;
 	i = i%4;
 	if(direction)
@@ -74,6 +84,11 @@ void ShooterActions::shoot(int direction)
 
 void ShooterActions::idle(int direction)
 {
+	if(isDead)
+	{
+		this->dead(direction);
+		return;
+	}
 	i=j;
 	i = i%10;
 	if(direction)
@@ -93,8 +108,22 @@ void ShooterActions::idle(int direction)
 	if(j>100) j =0;
 	bullet->fired();
 }
+
+int ShooterActions::getX()
+{
+	return x;
+}
+int ShooterActions::getY()
+{
+	return y;
+}
 void ShooterActions::jump(int direction)
 {
+	if(isDead)
+	{
+		this->dead(direction);
+		return;
+	}
 	i=j;
 	i = i%10;
 	if(direction)
@@ -119,8 +148,17 @@ void ShooterActions::jump(int direction)
 	if(j>100) j =0;
 	bullet->fired();
 }
+void ShooterActions::setDead()
+{
+	isDead = true;
+}
 void ShooterActions::down(int direction)
 {
+	if(isDead)
+	{
+		this->dead(direction);
+		return;
+	}
 	i=j;
 	i = i%10;
 	if(direction)
@@ -158,6 +196,7 @@ ShooterActions::ShooterActions(SDL_Renderer* ren)
 	x=50;
 	y=700;
 	size=150;
+	isDead = false;
 	
 
 	//loading run images
@@ -260,4 +299,25 @@ ShooterActions::ShooterActions(SDL_Renderer* ren)
 	jumpleftList.push_back(new Shooter("../res/shooterImages/Jump (10).png",renderer,"Main Shooter",1));
 
 	bullet = new Bullet(renderer);
+}
+ShooterActions::~ShooterActions()
+{
+	vector<vector<Shooter*>> v;
+	v.push_back(runList);
+	v.push_back(runleftList);
+	v.push_back(deadList);
+	v.push_back(deadleftList);
+	v.push_back(idleList);
+	v.push_back(idleleftList);
+	v.push_back(jumpList);
+	v.push_back(jumpleftList);
+	v.push_back(jumpList);
+	v.push_back(jumpleftList);
+	for (int i = 0; i < v.size(); i++)
+	{
+		for (int j = 0; j < v[i].size(); j++)
+		{
+			delete v[i][j];
+		}
+	}
 }

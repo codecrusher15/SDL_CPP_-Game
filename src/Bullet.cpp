@@ -67,3 +67,11 @@ bool Bullet::isRight()
 	if(isrightFired) return true;
 	else return false;
 }
+
+Bullet::~Bullet()
+{
+	delete rightBullet;
+	delete leftBullet;
+	rightBullet = NULL;
+	leftBullet = NULL;
+}

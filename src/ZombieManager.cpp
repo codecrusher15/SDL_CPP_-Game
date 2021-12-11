@@ -1,11 +1,12 @@
 #include"../include/ZombieManager.hpp"
 #include<stdlib.h>
 #include<iostream>
-ZombieManager::ZombieManager(SDL_Renderer* ren,Bullet* bul)
+ZombieManager::ZombieManager(SDL_Renderer* ren,ShooterActions* shooter)
 {
 	renderer = ren;
 	delay = 200;
-	bullet = bul;
+	bullet = shooter->getBullet();
+	this->shooter = shooter;
 	this->velocity = 1;
 }
 void ZombieManager::AddZombies()
@@ -42,6 +43,14 @@ void ZombieManager::killZombies()
 			zombies[i]->dead();
 			isZombieDead[i]--;
 		}
+		if(zombies[i]->getX()<0)
+		{
+			shooter->setDead();
+		}
+		/*if((zombies[i]->getX()<shooter->getX()+100 && zombies[i]->getX()+150>shooter->getX()) && (zombies[i]->getY()+125>shooter->getY() && shooter->getY()+75>zombies[i]->getY()))
+		{
+			shooter->setDead();
+		}*/
 		i++;
 	}
 	

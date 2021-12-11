@@ -33,7 +33,19 @@ ZombieActions::ZombieActions(SDL_Renderer* ren,float vel,int x,int y)
 	deadList.push_back(new Zombie("../res/zombie1/Dead (11).png",renderer,"Zombie1",1));
 	deadList.push_back(new Zombie("../res/zombie1/Dead (12).png",renderer,"Zombie1",1));
 }
-
+ZombieActions::~ZombieActions()
+{
+	vector<vector<Zombie*>> tmp;
+	tmp.push_back(deadList);
+	tmp.push_back(walkList);
+	for (int i = 0; i < tmp.size(); i++)
+	{
+		for (int j = 0; j < tmp[i].size(); j++)
+		{
+			delete tmp[i][j];
+		}
+	}
+}
 void ZombieActions::dead()
 {
 	i=currVel;

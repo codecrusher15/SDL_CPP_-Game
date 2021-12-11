@@ -8,9 +8,8 @@ MainRenderer::MainRenderer(const char* title,int width,int height):mainWindow(NU
 	renderer = SDL_CreateRenderer(mainWindow,-1,SDL_RENDERER_ACCELERATED);
 	shooter = new ShooterActions(renderer);
 	kc = new KeyboardController(renderer,shooter);
-	zm = new ZombieManager(renderer,shooter->getBullet());
+	zm = new ZombieManager(renderer,shooter);
 }
-
 SDL_Texture*  MainRenderer::Background(const char* filePath)
 {
 	SDL_Texture* texture = NULL;
@@ -41,4 +40,8 @@ MainRenderer::~MainRenderer()
 {
 	SDL_RenderClear(renderer);
 	SDL_DestroyWindow(mainWindow);
+	delete kc;
+	delete zm;
+	kc = NULL;
+	zm = NULL;
 }
