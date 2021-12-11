@@ -1,5 +1,6 @@
 #include"../include/ZombieManager.hpp"
 #include<stdlib.h>
+#include<iostream>
 ZombieManager::ZombieManager(SDL_Renderer* ren,Bullet* bul)
 {
 	renderer = ren;
@@ -12,7 +13,7 @@ void ZombieManager::AddZombies()
 	delay+=1;
 	if(delay>250)
 	{
-		int arr[] = {750,700,800};
+		int arr[] = {500,600,700};
 		int tmp = rand()%200+1800;
 		int tmp1 = rand()%3;
 		zombies.push_back(new ZombieActions(renderer,this->velocity,tmp,arr[tmp1]));
@@ -28,7 +29,7 @@ void ZombieManager::killZombies()
 	int i = 0;
 	while (i<zombies.size())
 	{
-		if(zombies[i]->getX()<(bullet->getX()+15) && zombies[i]->getX()>(bullet->getX()-25))
+		if((zombies[i]->getX()<(bullet->getX()+15) && zombies[i]->getX()>(bullet->getX()-25)) && ((zombies[i]->getY()>bullet->getY()-200)&& (zombies[i]->getY()<bullet->getY())))
 		{
 			isZombieDead[i]--;
 			if(isZombieDead[i]==99)

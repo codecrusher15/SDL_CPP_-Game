@@ -2,7 +2,6 @@
 #include<iostream>
 void ShooterActions::run(int direction)
 {
-	if(y<600) y+=5;
 	i=j;
 	i = i%8;
 	if(direction)
@@ -29,7 +28,6 @@ void ShooterActions::run(int direction)
 
 void ShooterActions::dead(int direction)
 {
-	if(y<600) y+=5;
 	i=j;
 	i = i%10;
 	if(direction)
@@ -52,7 +50,6 @@ void ShooterActions::dead(int direction)
 
 void ShooterActions::shoot(int direction)
 {
-	if(y<600) y+=5;
 	i=j;
 	i = i%4;
 	if(direction)
@@ -77,7 +74,6 @@ void ShooterActions::shoot(int direction)
 
 void ShooterActions::idle(int direction)
 {
-	if(y<600) y+=5;
 	i=j;
 	i = i%10;
 	if(direction)
@@ -103,15 +99,15 @@ void ShooterActions::jump(int direction)
 	i = i%10;
 	if(direction)
 	{
-		x-=4;
+		x-=2;
 		player = jumpleftList[i];
 	}
 	else
 	{
-		x+=4;
+		x+=2;
 		player =jumpList[i];
 	}
-	if(y>650) y-=5;
+	if(y>500) y-=5;
 	if(x<0) x = 0;
 	if(x>1600) x = 1600;
 	j+=0.1;
@@ -129,12 +125,12 @@ void ShooterActions::down(int direction)
 	i = i%10;
 	if(direction)
 	{
-		x-=4;
+		x-=2;
 		player = jumpleftList[i];
 	}
 	else
 	{
-		x+=4;
+		x+=2;
 		player =jumpList[i];
 	}
 	if(y<750) y+=5;
