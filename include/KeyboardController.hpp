@@ -13,4 +13,5 @@ class KeyboardController
 	KeyboardController(SDL_Renderer* render,ShooterActions*);
 	void ShooterControls();
 	void setEvent(SDL_Event* evn);
+	bool getShooterStatus();
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include"Shooter.hpp"
 #include"Bullet.hpp"
+#include "Audio.hpp"
 #include<vector>
 using std::vector;
 class ShooterActions
@@ -23,6 +24,7 @@ class ShooterActions
 	int i,dir,x,y,size,bulletDelay;
 	bool isDead;
 	float j;
+	Audio *effect;
 	public:
 	ShooterActions(SDL_Renderer*);
 	void run(int);
@@ -34,6 +36,7 @@ class ShooterActions
 	int getX();
 	int getY();
 	void setDead();
+	bool getShooterStatus();
 	vector<Bullet*> getBullet();
 	~ShooterActions();
 };

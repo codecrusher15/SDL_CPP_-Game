@@ -71,6 +71,7 @@ void ShooterActions::shoot(int direction)
 			if((!bullets[k]->isFired()) && bulletDelay>25)
 			{
 				bullets[k]->leftFire(x,y+50);
+				effect->play();
 				bulletDelay=0;
 				break;
 			}
@@ -84,6 +85,7 @@ void ShooterActions::shoot(int direction)
 			if((!bullets[k]->isFired()) && bulletDelay>25)
 			{
 				bullets[k]->rightFire(x+100,y+50);
+				effect->play();
 				bulletDelay=0;
 				break;
 			}
@@ -207,6 +209,12 @@ vector<Bullet*> ShooterActions::getBullet()
 {
 	return bullets;
 }
+
+bool ShooterActions::getShooterStatus()
+{
+	return isDead;
+}
+
 ShooterActions::ShooterActions(SDL_Renderer* ren)
 {
 	renderer = ren;
@@ -218,6 +226,8 @@ ShooterActions::ShooterActions(SDL_Renderer* ren)
 	size=150;
 	isDead = false;
 	
+	effect = new Audio();
+	effect->Load("../res/Audio/Fireball_Sound.wav");
 
 	//loading run images
 	runList.push_back(new Shooter("../res/shooterImages/r1.png",renderer,"Main Shooter",0));

@@ -63,3 +63,8 @@ void KeyboardController::ShooterControls()
 		break;
 	}
 }
+
+bool KeyboardController::getShooterStatus()
+{
+	return shooter->getShooterStatus();
+}

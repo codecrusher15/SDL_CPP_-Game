@@ -1,4 +1,5 @@
 #include"../include/ZombieActions.hpp"
+#include<iostream>
 ZombieActions::ZombieActions(SDL_Renderer* ren,float vel,int x,int y)
 {
 	renderer = ren;

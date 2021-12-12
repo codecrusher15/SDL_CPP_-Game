@@ -14,9 +14,12 @@ class ZombieManager
 	ShooterActions* shooter;
 	int delay;
 	float velocity;
+	int dead_zombie = 0;
+
 	public:
 	ZombieManager(SDL_Renderer*,ShooterActions*);
 	void AddZombies();
 	void renderZombies();
 	void killZombies();
+	int getDeathCount();
 };

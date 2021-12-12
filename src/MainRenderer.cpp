@@ -9,7 +9,15 @@ MainRenderer::MainRenderer(const char* title,int width,int height):mainWindow(NU
 	shooter = new ShooterActions(renderer);
 	kc = new KeyboardController(renderer,shooter);
 	zm = new ZombieManager(renderer,shooter);
+	text_color = {255,255,255};
+	fontsize = 30;
+	font = TTF_OpenFont("../res/Montserrat/Montserrat-Regular.ttf", fontsize);
+	if (font == NULL) {
+	    std::cout << "Failed the load the font!\n";
+	    std::cout << "SDL_TTF Error: " << TTF_GetError() << "\n";
+	}
 }
+
 SDL_Texture*  MainRenderer::Background(const char* filePath)
 {
 	SDL_Texture* texture = NULL;
@@ -26,7 +34,8 @@ void MainRenderer::renderTexture(SDL_Texture* tex)
 {
 	SDL_RenderCopy(renderer,tex,NULL,NULL);
 	kc->ShooterControls();
-	zm->AddZombies();
+	if(!kc->getShooterStatus())
+		zm->AddZombies();
 }
 void MainRenderer::display()
 {
@@ -36,6 +45,21 @@ void MainRenderer::passEvents(SDL_Event* event)
 {
 	kc->setEvent(event);
 }
+
+void MainRenderer::fontDisplay()
+{
+	int t = zm->getDeathCount();
+	text = "Score : " + to_string(t);
+	text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
+	ftexture = SDL_CreateTextureFromSurface(renderer, text_surface);
+	Score_rect.x = 10;  //controls the rect's x coordinate 
+	Score_rect.y = 10; // controls the rect's y coordinte
+	Score_rect.w = 100; // controls the width of the rect
+	Score_rect.h = 100; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture, nullptr, &Score_rect);
+	SDL_FreeSurface(text_surface);
+}
+
 MainRenderer::~MainRenderer()
 {
 	SDL_RenderClear(renderer);
@@ -45,3 +69,4 @@ MainRenderer::~MainRenderer()
 	kc = NULL;
 	zm = NULL;
 }
+

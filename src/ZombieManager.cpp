@@ -41,6 +41,7 @@ void ZombieManager::killZombies()
 				if(isZombieDead[i]==99)
 				{
 					bullet->dead();
+					dead_zombie++;
 				}
 			}
 		}
@@ -69,4 +70,9 @@ void ZombieManager::renderZombies()
 		if(isZombieDead[i]>=100)zombies[i]->walk();
 	}
 	
+}
+
+int ZombieManager::getDeathCount()
+{
+	return dead_zombie;
 }

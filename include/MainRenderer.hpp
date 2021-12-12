@@ -1,6 +1,8 @@
 #pragma once
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
+#include<SDL2/SDL_ttf.h>
+#include<string>
 #include"KeyboardController.hpp"
 #include"ZombieManager.hpp"
 #include"ShooterActions.hpp"
@@ -12,6 +14,13 @@ private:
 	KeyboardController* kc;
 	ZombieManager* zm;
 	ShooterActions* shooter;
+	int fontsize;
+	TTF_Font* font;
+	SDL_Color text_color;
+	std::string text = "0";
+	SDL_Surface *text_surface;
+	SDL_Texture* ftexture = nullptr;
+	SDL_Rect Score_rect;
 public:
 	MainRenderer(const char*,int,int);
 	SDL_Texture* Background(const char*);
@@ -19,5 +28,6 @@ public:
 	void renderTexture(SDL_Texture*);
 	void display();
 	void passEvents(SDL_Event*);
+	void fontDisplay();
 	~MainRenderer();	
 };
