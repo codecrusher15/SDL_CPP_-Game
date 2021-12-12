@@ -54,10 +54,10 @@ void ZombieManager::killZombies()
 		{
 			shooter->setDead();
 		}
-		/*if((zombies[i]->getX()<shooter->getX()+100 && zombies[i]->getX()+150>shooter->getX()) && (zombies[i]->getY()+125>shooter->getY() && shooter->getY()+75>zombies[i]->getY()))
+		if((zombies[i]->getX()<shooter->getX()+75 && zombies[i]->getX()+125>shooter->getX()) && (zombies[i]->getY()<shooter->getY() && shooter->getY()<zombies[i]->getY()+75))
 		{
 			shooter->setDead();
-		}*/
+		}
 		i++;
 	}
 	

@@ -68,7 +68,7 @@ void ShooterActions::shoot(int direction)
 		player = shootleftList[i];
 		for (int k = 0; k < 5; k++)
 		{
-			if((!bullets[k]->isFired()) && bulletDelay>40)
+			if((!bullets[k]->isFired()) && bulletDelay>25)
 			{
 				bullets[k]->leftFire(x,y+50);
 				bulletDelay=0;
@@ -81,7 +81,7 @@ void ShooterActions::shoot(int direction)
 		player =shootList[i];
 		for (int k = 0; k < 5; k++)
 		{
-			if((!bullets[k]->isFired()) && bulletDelay>40)
+			if((!bullets[k]->isFired()) && bulletDelay>25)
 			{
 				bullets[k]->rightFire(x+100,y+50);
 				bulletDelay=0;
