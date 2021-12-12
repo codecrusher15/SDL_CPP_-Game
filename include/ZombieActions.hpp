@@ -17,4 +17,5 @@ class ZombieActions
 	void dead();
 	int getX();
 	int getY();
+	~ZombieActions();
 };

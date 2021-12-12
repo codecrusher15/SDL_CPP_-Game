@@ -20,4 +20,5 @@ class Bullet
 	int getX();
 	int getY();
 	bool isRight();
+	~Bullet();
 };

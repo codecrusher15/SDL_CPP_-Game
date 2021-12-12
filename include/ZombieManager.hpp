@@ -1,6 +1,6 @@
 #pragma once
 #include"ZombieActions.hpp"
-#include"Bullet.hpp"
+#include"ShooterActions.hpp"
 #include<vector>
 using std::vector; 
 class ZombieManager
@@ -10,10 +10,11 @@ class ZombieManager
 	vector<int> isZombieDead;
 	SDL_Renderer* renderer;
 	Bullet* bullet;
+	ShooterActions* shooter;
 	int delay;
 	float velocity;
 	public:
-	ZombieManager(SDL_Renderer*,Bullet*);
+	ZombieManager(SDL_Renderer*,ShooterActions*);
 	void AddZombies();
 	void renderZombies();
 	void killZombies();

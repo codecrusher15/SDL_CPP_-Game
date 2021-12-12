@@ -21,6 +21,7 @@ class ShooterActions
 	vector<Shooter*> jumpList;
 	vector<Shooter*> jumpleftList;
 	int i,dir,x,y,size;
+	bool isDead;
 	float j;
 	public:
 	ShooterActions(SDL_Renderer*);
@@ -30,5 +31,9 @@ class ShooterActions
 	void idle(int );
 	void jump(int);
 	void down(int);
+	int getX();
+	int getY();
+	void setDead();
 	Bullet* getBullet();
+	~ShooterActions();
 };
