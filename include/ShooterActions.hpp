@@ -8,7 +8,7 @@ class ShooterActions
 	private:
 	Shooter* player;
 	SDL_Renderer* renderer;
-	Bullet* bullet;
+	vector<Bullet*> bullets;
 	vector<const char*> vstr;
 	vector<Shooter*> runList;
 	vector<Shooter*> deadList;
@@ -20,7 +20,7 @@ class ShooterActions
 	vector<Shooter*> idleleftList;
 	vector<Shooter*> jumpList;
 	vector<Shooter*> jumpleftList;
-	int i,dir,x,y,size;
+	int i,dir,x,y,size,bulletDelay;
 	bool isDead;
 	float j;
 	public:
@@ -34,6 +34,6 @@ class ShooterActions
 	int getX();
 	int getY();
 	void setDead();
-	Bullet* getBullet();
+	vector<Bullet*> getBullet();
 	~ShooterActions();
 };

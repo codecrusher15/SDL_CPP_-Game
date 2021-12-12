@@ -28,7 +28,8 @@ void ShooterActions::run(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
+	bulletDelay++;
 }
 
 void ShooterActions::dead(int direction)
@@ -50,7 +51,7 @@ void ShooterActions::dead(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
 }
 
 void ShooterActions::shoot(int direction)
@@ -65,12 +66,28 @@ void ShooterActions::shoot(int direction)
 	if(direction)
 	{
 		player = shootleftList[i];
-		bullet->leftFire(x,y+50);
+		for (int k = 0; k < 5; k++)
+		{
+			if((!bullets[k]->isFired()) && bulletDelay>40)
+			{
+				bullets[k]->leftFire(x,y+50);
+				bulletDelay=0;
+				break;
+			}
+		}
 	}
 	else
 	{
 		player =shootList[i];
-		bullet->rightFire(x+100,y+50);
+		for (int k = 0; k < 5; k++)
+		{
+			if((!bullets[k]->isFired()) && bulletDelay>40)
+			{
+				bullets[k]->rightFire(x+100,y+50);
+				bulletDelay=0;
+				break;
+			}
+		}
 	}
 	j+=0.1;
 	if(player)
@@ -79,7 +96,8 @@ void ShooterActions::shoot(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
+	bulletDelay++;
 }
 
 void ShooterActions::idle(int direction)
@@ -106,7 +124,8 @@ void ShooterActions::idle(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
+	bulletDelay++;
 }
 
 int ShooterActions::getX()
@@ -146,7 +165,7 @@ void ShooterActions::jump(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
 }
 void ShooterActions::setDead()
 {
@@ -181,11 +200,12 @@ void ShooterActions::down(int direction)
 		player->Render();
 	}
 	if(j>100) j =0;
-	bullet->fired();
+	for(int k=0;k<5;k++) bullets[k]->fired();
+	bulletDelay++;
 }
-Bullet* ShooterActions::getBullet()
+vector<Bullet*> ShooterActions::getBullet()
 {
-	return bullet;
+	return bullets;
 }
 ShooterActions::ShooterActions(SDL_Renderer* ren)
 {
@@ -298,7 +318,11 @@ ShooterActions::ShooterActions(SDL_Renderer* ren)
 	jumpleftList.push_back(new Shooter("../res/shooterImages/Jump (9).png",renderer,"Main Shooter",1));
 	jumpleftList.push_back(new Shooter("../res/shooterImages/Jump (10).png",renderer,"Main Shooter",1));
 
-	bullet = new Bullet(renderer);
+	for (int k = 0; k < 5; k++)
+	{
+		bullets.push_back(new Bullet(renderer));
+	}
+	bulletDelay = 100;
 }
 ShooterActions::~ShooterActions()
 {

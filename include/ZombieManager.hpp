@@ -9,6 +9,7 @@ class ZombieManager
 	vector<ZombieActions*> zombies;
 	vector<int> isZombieDead;
 	SDL_Renderer* renderer;
+	vector<Bullet*> bullets;
 	Bullet* bullet;
 	ShooterActions* shooter;
 	int delay;

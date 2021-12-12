@@ -8,8 +8,7 @@ class Bullet
 	private:
 	GameObject* leftBullet,*rightBullet;
 	SDL_Renderer* renderer;
-	bool isleftFired;
-	bool isrightFired;
+	bool isleftFired,isrightFired;
 	int x,y,size;
 	public:
 	Bullet(SDL_Renderer*);
@@ -20,5 +19,6 @@ class Bullet
 	int getX();
 	int getY();
 	bool isRight();
+	bool isFired();
 	~Bullet();
 };
