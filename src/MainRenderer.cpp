@@ -37,6 +37,16 @@ void MainRenderer::renderTexture(SDL_Texture* tex)
 	if(!kc->getShooterStatus())
 		zm->AddZombies();
 }
+void MainRenderer::Render_texture(SDL_Texture* tex, int x, int y, int width, int height) 
+{
+    SDL_Rect* end = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    end->x = x;
+    end->y = y;
+    end->h = height;
+    end->w = width;
+    SDL_RenderCopy(this->renderer, tex, NULL, end);
+	kc->ShooterControls();
+}
 void MainRenderer::display()
 {
 	SDL_RenderPresent(renderer);

@@ -3,6 +3,7 @@
 #include<iostream>
 #include"../include/MainRenderer.hpp"
 #include"../include/Audio.hpp"
+#include"../include/Button.hpp"
 
 int main()
 {
@@ -31,35 +32,61 @@ int main()
 	SDL_Event event;
 
 	//Window creation
-	MainRenderer window("Zombie Shooter",1800,900);
+	MainRenderer* window = new MainRenderer("Zombie Shooter",1800,900);
 
 	//Loading background
-	SDL_Texture* background = window.Background("../res/images/bg.jpg");
+	SDL_Texture* initial = window->Background("../res/images/bgI.jpg");
+	SDL_Texture* background = window->Background("../res/images/bg.jpg");
 
-	Audio *effect = new Audio();
-	effect->Load("../res/Audio/Large-Zombie.wav");
-	effect->play();	
+	Button* b_play = new Button(850,400,100,100, "../res/images/play.png");
+	Mouse* m = new Mouse();
+	SDL_StartTextInput();
+	SDL_Rect* s = new SDL_Rect();
+	s->x = 50;
+	s->y = 50;
+	s->h = 50;
+	s->w = 60;
+	bool Home_screen = true;
+	bool Play_screen = false;
+
 	//GameLoop
 	while (running)
 	{
-		frameStart = SDL_GetTicks();
-		audiotime = frameStart - b;
-		if((audiotime >= 0) && (audiotime <= 1000))
-		{
-			b += 30000;
-			effect->~Audio();
-			effect->Load("../res/Audio/Large-Zombie.wav");
-			effect->play();
-		}
 		while (SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT) running = false;
-			window.passEvents(&event);
+			window->passEvents(&event);
 		}
-		window.clear();
-		window.renderTexture(background);
-		window.fontDisplay();
-		window.display();
+		if(Home_screen){
+			window->clear();
+			SDL_PumpEvents();
+			SDL_SetTextInputRect(s);
+			window->renderTexture(initial);
+			b_play->render_button(window);
+			if(b_play->isClicked(m)){
+				Home_screen = false;
+				Play_screen = true;
+			}
+			window->display();
+		}
+		if(Play_screen){
+			Audio *effect = new Audio();
+			effect->Load("../res/Audio/Large-Zombie.wav");
+			effect->play();	
+			frameStart = SDL_GetTicks();
+			audiotime = frameStart - b;
+			if((audiotime >= 0) && (audiotime <= 1000))
+			{
+				b += 30000;
+				effect->~Audio();
+				effect->Load("../res/Audio/Large-Zombie.wav");
+				effect->play();
+			}
+			window->clear();
+			window->renderTexture(background);
+			window->fontDisplay();
+			window->display();
+		}
 
 		frameTime = SDL_GetTicks() - frameStart;
 		if(frameDelayTime > frameTime) SDL_Delay(frameDelayTime-frameTime);
@@ -67,7 +94,7 @@ int main()
 	}
 	
 
-	window.~MainRenderer();
+	window->~MainRenderer();
 	SDL_Quit();
 	return 0;
 }

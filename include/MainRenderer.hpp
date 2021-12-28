@@ -26,6 +26,7 @@ public:
 	SDL_Texture* Background(const char*);
 	void clear();
 	void renderTexture(SDL_Texture*);
+	void Render_texture(SDL_Texture* tex, int x, int y, int width, int height);
 	void display();
 	void passEvents(SDL_Event*);
 	void fontDisplay();

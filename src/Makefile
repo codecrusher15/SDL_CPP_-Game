@@ -1,2 +1,2 @@
-output: MainRenderer.cpp main.cpp GameObject.cpp Shooter.cpp ShooterActions.cpp KeyboardController.cpp Zombie.cpp ZombieActions.cpp ZombieManager.cpp Bullet.cpp Audio.cpp
-	g++ -o output MainRenderer.cpp main.cpp Shooter.cpp ShooterActions.cpp KeyboardController.cpp Zombie.cpp ZombieActions.cpp ZombieManager.cpp Bullet.cpp GameObject.cpp Audio.cpp -lSDL2 -lSDL2_image -lSDL2_ttf
+output: MainRenderer.cpp main.cpp GameObject.cpp Shooter.cpp ShooterActions.cpp KeyboardController.cpp Zombie.cpp ZombieActions.cpp ZombieManager.cpp Bullet.cpp Audio.cpp Button.cpp Mouse.cpp
+	g++ -o output MainRenderer.cpp main.cpp Shooter.cpp ShooterActions.cpp KeyboardController.cpp Zombie.cpp ZombieActions.cpp ZombieManager.cpp Bullet.cpp GameObject.cpp Audio.cpp Button.cpp Mouse.cpp -lSDL2 -lSDL2_image -lSDL2_ttf
