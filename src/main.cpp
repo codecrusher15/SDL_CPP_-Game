@@ -38,7 +38,7 @@ int main()
 	SDL_Texture* initial = window->Background("../res/images/bgI.jpg");
 	SDL_Texture* background = window->Background("../res/images/bg.jpg");
 
-	Button* b_play = new Button(850,400,100,100, "../res/images/play.png");
+	Button* b_play = new Button(800,410,80,200, "../res/images/play.png");
 	Mouse* m = new Mouse();
 	SDL_StartTextInput();
 	SDL_Rect* s = new SDL_Rect();
@@ -67,6 +67,7 @@ int main()
 				Home_screen = false;
 				Play_screen = true;
 			}
+			window->fontDisplay();
 			window->display();
 		}
 		if(Play_screen){
