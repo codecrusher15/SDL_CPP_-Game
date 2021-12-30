@@ -21,6 +21,7 @@ private:
 	SDL_Surface *text_surface;
 	SDL_Texture* ftexture = nullptr;
 	SDL_Rect Score_rect;
+	bool GameOn;
 public:
 	MainRenderer(const char*,int,int);
 	SDL_Texture* Background(const char*);
@@ -30,5 +31,6 @@ public:
 	void display();
 	void passEvents(SDL_Event*);
 	void fontDisplay();
+	void startGame();
 	~MainRenderer();	
 };

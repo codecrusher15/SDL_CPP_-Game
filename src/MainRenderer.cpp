@@ -1,11 +1,40 @@
 #include"../include/MainRenderer.hpp"
 #include<iostream>
 using namespace std;
+#include<time.h>
+#include<stdio.h>
+
+void delayX(int n){
+	int milli_seconds = 1000 * n;
+  
+    // Storing start time
+    clock_t start_time = clock();
+  
+    // looping till required time is not achieved
+    while (clock() < start_time + milli_seconds)
+        ;
+}
+
 MainRenderer::MainRenderer(const char* title,int width,int height):mainWindow(NULL),renderer(NULL)
 {
+	GameOn = false;
 	mainWindow = SDL_CreateWindow(title,SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_SHOWN);
 	if(mainWindow == NULL) cout <<" Window failed to initialise. ERROR:" << SDL_GetError() << endl;
 	renderer = SDL_CreateRenderer(mainWindow,-1,SDL_RENDERER_ACCELERATED);
+	// shooter = new ShooterActions(renderer);
+	// kc = new KeyboardController(renderer,shooter);
+	// zm = new ZombieManager(renderer,shooter);
+	// text_color = {255,255,255};
+	// fontsize = 30;
+	// font = TTF_OpenFont("../res/Montserrat/Montserrat-Regular.ttf", fontsize);
+	// if (font == NULL) {
+	//     std::cout << "Failed the load the font!\n";
+	//     std::cout << "SDL_TTF Error: " << TTF_GetError() << "\n";
+	// }
+}
+
+void MainRenderer::startGame(){
+	GameOn = true;
 	shooter = new ShooterActions(renderer);
 	kc = new KeyboardController(renderer,shooter);
 	zm = new ZombieManager(renderer,shooter);
@@ -33,9 +62,11 @@ void MainRenderer::clear()
 void MainRenderer::renderTexture(SDL_Texture* tex)
 {
 	SDL_RenderCopy(renderer,tex,NULL,NULL);
-	kc->ShooterControls();
-	if(!kc->getShooterStatus())
-		zm->AddZombies();
+	if(GameOn){
+		kc->ShooterControls();
+		if(!kc->getShooterStatus())
+			zm->AddZombies();
+	}
 }
 void MainRenderer::Render_texture(SDL_Texture* tex, int x, int y, int width, int height) 
 {
@@ -45,7 +76,9 @@ void MainRenderer::Render_texture(SDL_Texture* tex, int x, int y, int width, int
     end->h = height;
     end->w = width;
     SDL_RenderCopy(this->renderer, tex, NULL, end);
-	kc->ShooterControls();
+	if(GameOn){
+		kc->ShooterControls();
+	}
 }
 void MainRenderer::display()
 {
@@ -53,7 +86,9 @@ void MainRenderer::display()
 }
 void MainRenderer::passEvents(SDL_Event* event)
 {
-	kc->setEvent(event);
+	if(GameOn){
+		kc->setEvent(event);
+	}
 }
 
 void MainRenderer::fontDisplay()
