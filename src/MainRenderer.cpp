@@ -1,10 +1,10 @@
 #include"../include/MainRenderer.hpp"
 #include<iostream>
 using namespace std;
-#include<time.h>
+//#include<time.h>
 #include<stdio.h>
 
-void delayX(int n){
+/*void delayX(int n){
 	int milli_seconds = 1000 * n;
   
     // Storing start time
@@ -13,7 +13,7 @@ void delayX(int n){
     // looping till required time is not achieved
     while (clock() < start_time + milli_seconds)
         ;
-}
+}*/
 
 MainRenderer::MainRenderer(const char* title,int width,int height):mainWindow(NULL),renderer(NULL)
 {
@@ -76,9 +76,9 @@ void MainRenderer::Render_texture(SDL_Texture* tex, int x, int y, int width, int
     end->h = height;
     end->w = width;
     SDL_RenderCopy(this->renderer, tex, NULL, end);
-	if(GameOn){
+	/*if(GameOn){
 		kc->ShooterControls();
-	}
+	}*/
 }
 void MainRenderer::display()
 {

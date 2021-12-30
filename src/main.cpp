@@ -4,10 +4,10 @@
 #include"../include/MainRenderer.hpp"
 #include"../include/Audio.hpp"
 #include"../include/Button.hpp"
-#include<time.h>
+//#include<time.h>
 #include<stdio.h>
 
-void delay(int n){
+/*void delay(int n){
 	int milli_seconds = 1000 * n;
   
     // Storing start time
@@ -16,7 +16,7 @@ void delay(int n){
     // looping till required time is not achieved
     while (clock() < start_time + milli_seconds)
         ;
-}
+}*/
 
 int main()
 {
@@ -63,17 +63,22 @@ int main()
 	bool Play_screen = false;
 	bool start = true;
 
+	Audio *effect = new Audio();
+	effect->Load("../res/Audio/Large-Zombie.wav");
+	effect->play();
 	//GameLoop
 	while (running)
 	{
 		while (SDL_PollEvent(&event))
 		{
+			//static int id=1;
+			//std::cout<<"hello world" << id++ << std::endl;
 			if(event.type == SDL_QUIT) running = false;
 			window->passEvents(&event);
 		}
 		if(Home_screen){
 			window->clear();
-			SDL_PumpEvents();
+			//SDL_PumpEvents();
 			SDL_SetTextInputRect(s);
 			window->renderTexture(initial);
 			b_play->render_button(window);
@@ -94,10 +99,7 @@ int main()
 				// {
 				// 	if(event.type == SDL_QUIT) running = false;
 				// 	window->passEvents(&event);
-				// }
-				Audio *effect = new Audio();
-				effect->Load("../res/Audio/Large-Zombie.wav");
-				effect->play();	
+				// }	
 				frameStart = SDL_GetTicks();
 				audiotime = frameStart - b;
 				if((audiotime >= 0) && (audiotime <= 1000))
@@ -107,6 +109,7 @@ int main()
 					effect->Load("../res/Audio/Large-Zombie.wav");
 					effect->play();
 				}
+
 				window->clear();
 				window->renderTexture(background);
 				window->fontDisplay();
