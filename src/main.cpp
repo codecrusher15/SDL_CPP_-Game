@@ -51,7 +51,9 @@ int main()
 	SDL_Texture* initial = window->Background("../res/images/bgI.jpg");
 	SDL_Texture* background = window->Background("../res/images/bg.jpg");
 
-	Button* b_play = new Button(800,410,80,200, "../res/images/play.png");
+	Button* b_play = new Button(90,80,80,200, "../res/images/play.png");
+	Button* b_quit = new Button(1700,100,50,50, "../res/images/exit.jpg");
+	Button* b_restart = new Button(1630,100,50,50, "../res/images/restart.jpg");
 	Mouse* m = new Mouse();
 	SDL_StartTextInput();
 	SDL_Rect* s = new SDL_Rect();
@@ -87,21 +89,20 @@ int main()
 				//delay(1);
 				Play_screen = true;
 			}
-			//window->fontDisplay();
 			window->display();
 		}
 		if(Play_screen){
+				window->clear();
+				window->renderTexture(background);
+
 				if(start){
 					window->startGame();
 					start = false;
-				}
-				// while (SDL_PollEvent(&event))
-				// {
-				// 	if(event.type == SDL_QUIT) running = false;
-				// 	window->passEvents(&event);
-				// }	
+				}	
+
 				frameStart = SDL_GetTicks();
 				audiotime = frameStart - b;
+
 				if((audiotime >= 0) && (audiotime <= 1000))
 				{
 					b += 30000;
@@ -110,8 +111,18 @@ int main()
 					effect->play();
 				}
 
-				window->clear();
-				window->renderTexture(background);
+				b_quit->render_button(window);
+				if(b_quit->isClicked(m)){
+					window->~MainRenderer();
+					SDL_Quit();
+					return 0;
+				}
+
+				b_restart->render_button(window);
+				if(b_restart->isClicked(m)){
+					window->startGame();
+				}
+
 				window->fontDisplay();
 				window->display();
 		}
