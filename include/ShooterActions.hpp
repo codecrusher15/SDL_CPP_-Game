@@ -38,5 +38,6 @@ class ShooterActions
 	void setDead();
 	bool getShooterStatus();
 	vector<Bullet*> getBullet();
+	bool Dead();
 	~ShooterActions();
 };

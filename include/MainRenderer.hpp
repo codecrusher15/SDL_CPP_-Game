@@ -22,6 +22,7 @@ private:
 	SDL_Texture* ftexture = nullptr;
 	SDL_Rect Score_rect;
 	bool GameOn;
+	bool isAlive = true;
 public:
 	MainRenderer(const char*,int,int);
 	SDL_Texture* Background(const char*);
@@ -32,5 +33,6 @@ public:
 	void passEvents(SDL_Event*);
 	void fontDisplay();
 	void startGame();
+	bool Alive();
 	~MainRenderer();	
 };

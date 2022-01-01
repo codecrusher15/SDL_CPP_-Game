@@ -1,5 +1,6 @@
 #include"../include/ShooterActions.hpp"
 #include<iostream>
+using namespace std;
 void ShooterActions::run(int direction)
 {
 	if(isDead)
@@ -50,6 +51,7 @@ void ShooterActions::dead(int direction)
 		player->Update(x,y,size,size);
 		player->Render();
 	}
+	
 	if(j>100) j =0;
 	for(int k=0;k<5;k++) bullets[k]->fired();
 }
@@ -172,6 +174,10 @@ void ShooterActions::jump(int direction)
 void ShooterActions::setDead()
 {
 	isDead = true;
+}
+bool ShooterActions::Dead()
+{
+	return isDead;
 }
 void ShooterActions::down(int direction)
 {

@@ -65,8 +65,18 @@ void MainRenderer::renderTexture(SDL_Texture* tex)
 	if(GameOn){
 		kc->ShooterControls();
 		if(!kc->getShooterStatus())
+		{
 			zm->AddZombies();
+		}
+		else{
+			this->isAlive = false;
+			// cout << "main rend" << endl;
+		}
 	}
+}
+bool MainRenderer::Alive()
+{
+	return this->isAlive;
 }
 void MainRenderer::Render_texture(SDL_Texture* tex, int x, int y, int width, int height) 
 {

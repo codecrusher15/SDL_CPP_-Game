@@ -15,6 +15,7 @@ class ZombieManager
 	int delay;
 	float velocity;
 	int dead_zombie = 0;
+	bool isAlive = true;
 
 	public:
 	ZombieManager(SDL_Renderer*,ShooterActions*);
@@ -22,4 +23,5 @@ class ZombieManager
 	void renderZombies();
 	void killZombies();
 	int getDeathCount();
+	bool Alive();
 };

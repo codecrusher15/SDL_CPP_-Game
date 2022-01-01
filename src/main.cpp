@@ -6,7 +6,7 @@
 #include"../include/Button.hpp"
 //#include<time.h>
 #include<stdio.h>
-
+using namespace std;
 /*void delay(int n){
 	int milli_seconds = 1000 * n;
   
@@ -54,6 +54,8 @@ int main()
 	Button* b_play = new Button(90,80,80,200, "../res/images/play.png");
 	Button* b_quit = new Button(1700,100,50,50, "../res/images/exit.jpg");
 	Button* b_restart = new Button(1630,100,50,50, "../res/images/restart.jpg");
+	Button* b_leaderboard = new Button(90,180,50,50, "../res/images/leaderboard.jpg");
+	Button* b_instructions = new Button(160,180,50,50, "../res/images/instruction.jpg");
 	Mouse* m = new Mouse();
 	SDL_StartTextInput();
 	SDL_Rect* s = new SDL_Rect();
@@ -84,15 +86,26 @@ int main()
 			SDL_SetTextInputRect(s);
 			window->renderTexture(initial);
 			b_play->render_button(window);
+			b_leaderboard->render_button(window);
+			b_instructions->render_button(window);
 			if(b_play->isClicked(m)){
 				Home_screen = false;
 				//delay(1);
 				Play_screen = true;
+				start = true;
+			}
+			if(b_leaderboard->isClicked(m)){
+
+			}
+			if(b_instructions->isClicked(m)){
+				
 			}
 			window->display();
 		}
 		if(Play_screen){
-				window->clear();
+			window->clear();
+			if(window->Alive())
+			{
 				window->renderTexture(background);
 
 				if(start){
@@ -125,6 +138,13 @@ int main()
 
 				window->fontDisplay();
 				window->display();
+			}
+			else
+			{
+				Play_screen = false;
+				Home_screen = true;
+				cout << "shooter dead" << endl;
+			}
 		}
 
 		frameTime = SDL_GetTicks() - frameStart;

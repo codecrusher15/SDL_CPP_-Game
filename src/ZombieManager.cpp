@@ -1,6 +1,7 @@
 #include"../include/ZombieManager.hpp"
 #include<stdlib.h>
 #include<iostream>
+using namespace std;
 ZombieManager::ZombieManager(SDL_Renderer* ren,ShooterActions* shooter)
 {
 	renderer = ren;
@@ -54,14 +55,22 @@ void ZombieManager::killZombies()
 		if(zombies[i]->getX()<0)
 		{
 			shooter->setDead();
+			// cout << "shooter dead 1 zm" << endl;
+			this->isAlive = false;
 		}
 		if((zombies[i]->getX()<shooter->getX()+75 && zombies[i]->getX()+125>shooter->getX()) && (zombies[i]->getY()<shooter->getY() && shooter->getY()<zombies[i]->getY()+75))
 		{
 			shooter->setDead();
+			// cout << "shooter dead 2 zm" << endl;
+			this->isAlive = false;
 		}
 		i++;
 	}
 	
+}
+bool ZombieManager::Alive()
+{
+	return this->isAlive;
 }
 void ZombieManager::renderZombies()
 {
