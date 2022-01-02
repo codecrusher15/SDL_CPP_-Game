@@ -4,21 +4,10 @@
 #include"../include/MainRenderer.hpp"
 #include"../include/Audio.hpp"
 #include"../include/Button.hpp"
-//#include<time.h>
 #include<stdio.h>
 #include <iostream>
 #include <fstream>
 using namespace std;
-/*void delay(int n){
-	int milli_seconds = 1000 * n;
-  
-    // Storing start time
-    clock_t start_time = clock();
-  
-    // looping till required time is not achieved
-    while (clock() < start_time + milli_seconds)
-        ;
-}*/
 
 int main()
 {
@@ -68,11 +57,6 @@ int main()
 	s->y = 50;
 	s->h = 50;
 	s->w = 60;
-	// SDL_Rect* ins = new SDL_Rect();
-	// ins->x = 200;
-	// ins->y = 100;
-	// ins->h = 500;
-	// ins->w = 500;
 	bool Home_screen = true;
 	bool Play_screen = false;
 	bool Instructions_screen = false;
@@ -87,14 +71,11 @@ int main()
 	{
 		while (SDL_PollEvent(&event))
 		{
-			//static int id=1;
-			//std::cout<<"hello world" << id++ << std::endl;
 			if(event.type == SDL_QUIT) running = false;
 			window->passEvents(&event);
 		}
 		if(Home_screen){
 			window->clear();
-			//SDL_PumpEvents();
 			SDL_SetTextInputRect(s);
 			window->renderTexture(initial);
 			b_play->render_button(window);
@@ -102,7 +83,6 @@ int main()
 			b_instructions->render_button(window);
 			if(b_play->isClicked(m)){
 				Home_screen = false;
-				//delay(1);
 				Play_screen = true;
 				start = true;
 			}
@@ -179,14 +159,8 @@ int main()
 				Play_screen = false;
 				Home_screen = true;
 				int score = window->get_score();
-				//int s1,s2,s3,s4,s5;
 				vector<int> numbers;
 				ifstream myfile1 ("Topscores.txt");
-				// if (myfile1.is_open())
-				// {
-				// 	myfile1>>s1>>s2>>s3>>s4>>s5;
-				// 	myfile1.close();
-				// }
 				while (!myfile1.eof()) {
 					int tmp;
 					myfile1 >> tmp;
@@ -229,8 +203,6 @@ int main()
 					myfile<<numbers[0]<< " " <<numbers[1]<< " " <<numbers[2]<< " " <<numbers[3]<< " " <<numbers[4];
 					myfile.close();
 				}
-				//window->KillAll();
-				//cout << "shooter dead" << endl;
 			}
 		}
 
