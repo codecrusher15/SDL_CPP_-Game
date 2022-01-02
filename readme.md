@@ -1,1 +1,0 @@
-bg.jpg from -> 'https://www.freepik.com/vectors/city'>City vector created by upklyak - www.freepik.com
