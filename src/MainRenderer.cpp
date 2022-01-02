@@ -1,5 +1,6 @@
 #include"../include/MainRenderer.hpp"
 #include<iostream>
+#include<fstream>
 using namespace std;
 //#include<time.h>
 #include<stdio.h>
@@ -103,7 +104,7 @@ void MainRenderer::passEvents(SDL_Event* event)
 
 void MainRenderer::fontDisplay()
 {
-	int t = zm->getDeathCount();
+	this->t = zm->getDeathCount();
 	text = "Score : " + to_string(t);
 	text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
 	ftexture = SDL_CreateTextureFromSurface(renderer, text_surface);
@@ -113,6 +114,90 @@ void MainRenderer::fontDisplay()
 	Score_rect.h = 100; // controls the height of the rect
 	SDL_RenderCopy(renderer, ftexture, nullptr, &Score_rect);
 	SDL_FreeSurface(text_surface);
+}
+
+void MainRenderer::DisplayLeaderboard(){
+	int s1,s2,s3,s4,s5;
+	ifstream myfile1 ("Topscores.txt");
+	if (myfile1.is_open())
+	{
+		myfile1>>s1>>s2>>s3>>s4>>s5;
+		myfile1.close();
+	}
+	text = "Leaderboard";
+	text1 = "1)" + to_string(s1); 
+	text2 = "2)" + to_string(s2);
+	text3 = "3)" + to_string(s3);
+	text4 = "4)" + to_string(s4);
+	text5 = "5)" + to_string(s5);
+	text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
+	ftexture = SDL_CreateTextureFromSurface(renderer, text_surface);
+	Score_rect.x = 500;  //controls the rect's x coordinate 
+	Score_rect.y = 200; // controls the rect's y coordinte
+	Score_rect.w = 800; // controls the width of the rect
+	Score_rect.h = 100; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture, nullptr, &Score_rect);
+	SDL_FreeSurface(text_surface);
+
+	text_surface1 = TTF_RenderText_Solid(font, text1.c_str(), text_color);
+	ftexture1 = SDL_CreateTextureFromSurface(renderer, text_surface1);
+	Score_rect1.x = 300;  //controls the rect's x coordinate 
+	Score_rect1.y = 300; // controls the rect's y coordinte
+	Score_rect1.w = 150; // controls the width of the rect
+	Score_rect1.h = 75; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture1, nullptr, &Score_rect1);
+	SDL_FreeSurface(text_surface1);
+
+	text_surface2 = TTF_RenderText_Solid(font, text2.c_str(), text_color);
+	ftexture2 = SDL_CreateTextureFromSurface(renderer, text_surface2);
+	Score_rect2.x = 300;  //controls the rect's x coordinate 
+	Score_rect2.y = 400; // controls the rect's y coordinte
+	Score_rect2.w = 150; // controls the width of the rect
+	Score_rect2.h = 75; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture2, nullptr, &Score_rect2);
+	SDL_FreeSurface(text_surface2);
+
+	text_surface3 = TTF_RenderText_Solid(font, text3.c_str(), text_color);
+	ftexture3 = SDL_CreateTextureFromSurface(renderer, text_surface3);
+	Score_rect3.x = 300;  //controls the rect's x coordinate 
+	Score_rect3.y = 500; // controls the rect's y coordinte
+	Score_rect3.w = 150; // controls the width of the rect
+	Score_rect3.h = 75; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture3, nullptr, &Score_rect3);
+	SDL_FreeSurface(text_surface3);
+
+	text_surface4 = TTF_RenderText_Solid(font, text4.c_str(), text_color);
+	ftexture4 = SDL_CreateTextureFromSurface(renderer, text_surface4);
+	Score_rect4.x = 300;  //controls the rect's x coordinate 
+	Score_rect4.y = 600; // controls the rect's y coordinte
+	Score_rect4.w = 150; // controls the width of the rect
+	Score_rect4.h = 75; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture4, nullptr, &Score_rect4);
+	SDL_FreeSurface(text_surface4);
+
+	text_surface5 = TTF_RenderText_Solid(font, text5.c_str(), text_color);
+	ftexture5 = SDL_CreateTextureFromSurface(renderer, text_surface5);
+	Score_rect5.x = 300;  //controls the rect's x coordinate 
+	Score_rect5.y = 700; // controls the rect's y coordinte
+	Score_rect5.w = 150; // controls the width of the rect
+	Score_rect5.h = 75; // controls the height of the rect
+	SDL_RenderCopy(renderer, ftexture5, nullptr, &Score_rect5);
+	SDL_FreeSurface(text_surface5);
+}
+
+int MainRenderer::get_score()
+{
+	return t;
+}
+
+void MainRenderer::KillAll()
+{
+	delete shooter;
+	delete kc;
+	delete zm;
+	kc = NULL;
+	zm = NULL;
+	shooter = NULL;
 }
 
 MainRenderer::~MainRenderer()
