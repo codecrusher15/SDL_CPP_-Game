@@ -164,15 +164,16 @@ int MainRenderer::get_score()
 	return t;
 }
 
-void MainRenderer::KillAll()
-{
-	delete shooter;
-	delete kc;
-	delete zm;
-	kc = NULL;
-	zm = NULL;
-	shooter = NULL;
-}
+// void MainRenderer::KillAll()
+// {
+// 	shooter->~ShooterActions();
+// 	delete shooter;
+// 	delete kc;
+// 	delete zm;
+// 	kc = NULL;
+// 	zm = NULL;
+// 	shooter = NULL;
+// }
 
 MainRenderer::~MainRenderer()
 {

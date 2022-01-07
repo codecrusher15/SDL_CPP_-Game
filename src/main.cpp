@@ -158,6 +158,7 @@ int main()
 			{
 				Play_screen = false;
 				Home_screen = true;
+				start = true;
 				int score = window->get_score();
 				vector<int> numbers;
 				ifstream myfile1 ("Topscores.txt");
